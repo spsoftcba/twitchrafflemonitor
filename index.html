@@ -311,7 +311,7 @@ footer a{color:var(--muted);text-decoration:underline}
     </div>
   </div>
   <div style="margin-top:2rem">
-    <a href="https://discord.gg/fnd8CD2mg5" target="_blank" class="btn-discord">
+    <a href="#" onclick="pedirPorDiscord();return false;" class="btn-discord">
       Solicitar en Discord →
     </a>
   </div>
@@ -319,8 +319,9 @@ footer a{color:var(--muted);text-decoration:underline}
 
 <div class="cta-final">
   <h2>Listo para empezar</h2>
-  <p>Probá gratis 24 horas o solicitá tu licencia ahora.</p>
+  <p>Descargá el bot, probá gratis 24 horas o solicitá tu licencia ahora.</p>
   <div class="hero-btns">
+    <a href="https://www.mediafire.com/file/1ajj9y8dxk68shr/TwitchRaffleMonitor_v5.zip/file" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;text-decoration:none">↓ Descargar</a>
     <button class="btn-primary" onclick="openModal('trial')">Probar gratis</button>
     <button class="btn-ghost" onclick="openModal('pro')">Solicitar licencia</button>
   </div>
@@ -369,7 +370,7 @@ footer a{color:var(--muted);text-decoration:underline}
       <button class="btn-primary" style="width:100%;justify-content:center" onclick="enviarSolicitud()" id="f-submit">Enviar solicitud</button>
       <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:0.9rem">
         o pedila directo en
-        <a href="https://discord.gg/fnd8CD2mg5" target="_blank" style="color:#8ea1ff;text-decoration:underline">Discord</a>
+        <a href="#" onclick="pedirPorDiscord();return false;" style="color:#8ea1ff;text-decoration:underline">Discord</a>
       </p>
     </div>
     <div class="modal-success" id="modal-success">
@@ -425,6 +426,32 @@ function copiarKeyTrial(){
   });
 }
 
+function pedirPorDiscord(){
+  const nombre = (document.getElementById('f-nombre').value || '').trim();
+  const email = (document.getElementById('f-email').value || '').trim();
+  const planSel = document.getElementById('f-plan');
+  const plan = planSel ? planSel.value : '';
+
+  let msg;
+  if(nombre || email){
+    msg = `Hola! Quiero solicitar una licencia de Raffle Monitor Twitch.\n\n`
+        + `Plan: ${plan || 'Basic / PRO'}\n`
+        + `Nombre: ${nombre || '-'}\n`
+        + `Email: ${email || '-'}`;
+  } else {
+    msg = `Hola! Quiero solicitar una licencia de Raffle Monitor Twitch.\n\n`
+        + `Plan: Basic / PRO\n`
+        + `Nombre: \n`
+        + `Email: `;
+  }
+
+  navigator.clipboard.writeText(msg).then(function(){
+    window.open('https://discord.gg/fnd8CD2mg5', '_blank');
+  }).catch(function(){
+    // Si el navegador bloquea el portapapeles, igual abrimos Discord
+    window.open('https://discord.gg/fnd8CD2mg5', '_blank');
+  });
+}
 async function enviarSolicitud(){
   const nombre = document.getElementById('f-nombre').value.trim();
   const email = document.getElementById('f-email').value.trim();
