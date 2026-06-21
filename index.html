@@ -326,6 +326,30 @@ footer a{color:var(--muted);text-decoration:underline}
   </div>
 </div>
 
+<!-- MODAL TRIAL -->
+<div class="modal-overlay" id="modal-trial">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeTrialModal()">×</button>
+    <div class="modal-eyebrow">Free Trial — 24hs</div>
+    <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;margin-bottom:1.2rem">
+      Descargá el bot, abrilo, y cuando te pida la clave de activación pegá esta:
+    </p>
+    <div onclick="copiarKeyTrial()" title="Click para copiar"
+         style="background:var(--dark);border:1px solid var(--border);border-radius:6px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;margin-bottom:0.8rem">
+      <span id="trial-key-text" style="font-family:'Space Grotesk',monospace;font-size:1.05rem;color:var(--green);letter-spacing:1px;word-break:break-all">TWITCH-TRIAL-1111-1111</span>
+      <span style="font-size:1rem;color:var(--muted);flex-shrink:0">📋</span>
+    </div>
+    <p id="trial-copy-msg" style="text-align:center;font-size:0.78rem;color:var(--green);opacity:0;transition:opacity 0.3s;margin-bottom:0.8rem">¡Copiado!</p>
+    <p style="color:var(--muted);font-size:0.78rem;line-height:1.5">
+      La primera vez que la uses, el bot genera una licencia única para tu PC válida por
+      24hs exactas desde ese momento. Podés usarla una sola vez por equipo.
+    </p>
+    <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1rem">
+      ¿Necesitás más tiempo? <a href="#" onclick="closeTrialModal();openModal('basic');return false;" style="color:#8ea1ff;text-decoration:underline">Mirá los planes pagos</a>
+    </p>
+  </div>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
@@ -338,7 +362,6 @@ footer a{color:var(--muted);text-decoration:underline}
       <input id="f-email" type="email" placeholder="tu@email.com">
       <label>Plan de interés</label>
       <select id="f-plan">
-        <option value="Free Trial">Free Trial — 24hs</option>
         <option value="Basic">Basic — 5 USD/mes</option>
         <option value="PRO">PRO — 10 USD/mes</option>
       </select>
@@ -363,9 +386,13 @@ footer a{color:var(--muted);text-decoration:underline}
 
 <script>
 function openModal(plan){
-  const map = {trial:'Free Trial', basic:'Basic', pro:'PRO'};
-  document.getElementById('f-plan').value = map[plan] || 'Free Trial';
-  document.getElementById('modal-eyebrow').innerText = 'Solicitar licencia — ' + (map[plan] || 'Free Trial');
+  if(plan === 'trial'){
+    openTrialModal();
+    return;
+  }
+  const map = {basic:'Basic', pro:'PRO'};
+  document.getElementById('f-plan').value = map[plan] || 'Basic';
+  document.getElementById('modal-eyebrow').innerText = 'Solicitar licencia — ' + (map[plan] || 'Basic');
   document.getElementById('modal-form').style.display = 'block';
   document.getElementById('modal-success').style.display = 'none';
   document.getElementById('modal').classList.add('open');
@@ -379,6 +406,24 @@ function closeModal(){
 document.getElementById('modal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
+
+function openTrialModal(){
+  document.getElementById('modal-trial').classList.add('open');
+}
+function closeTrialModal(){
+  document.getElementById('modal-trial').classList.remove('open');
+}
+document.getElementById('modal-trial').addEventListener('click', function(e){
+  if(e.target === this) closeTrialModal();
+});
+function copiarKeyTrial(){
+  const key = document.getElementById('trial-key-text').innerText;
+  navigator.clipboard.writeText(key).then(function(){
+    const msg = document.getElementById('trial-copy-msg');
+    msg.style.opacity = '1';
+    setTimeout(function(){ msg.style.opacity = '0'; }, 1800);
+  });
+}
 
 async function enviarSolicitud(){
   const nombre = document.getElementById('f-nombre').value.trim();
