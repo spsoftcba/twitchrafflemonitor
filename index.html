@@ -247,12 +247,13 @@ footer a{color:var(--muted);text-decoration:underline}
       <div class="plan-card">
         <div class="plan-name">Free Trial</div>
         <div class="plan-price">0<span style="font-size:1rem">USD</span></div>
-        <div class="plan-period">24 horas · única vez</div>
+        <div class="plan-period">48 horas · única vez</div>
         <hr class="plan-divider">
         <ul class="plan-features">
           <li>Monitor multicanal</li>
-          <li>Alertas de escritorio</li>
-          <li class="no">Bot automático</li>
+          <li>Alertas de escritorio, whatsapp y sonidos</li>
+          <li>Modo interacción de sorteo</li>
+          <li>Bot automático</li>
           <li class="no">Sin soporte</li>
         </ul>
         <button class="plan-btn" onclick="openModal('trial')">Probar gratis</button>
@@ -264,8 +265,9 @@ footer a{color:var(--muted);text-decoration:underline}
         <hr class="plan-divider">
         <ul class="plan-features">
           <li>Monitor multicanal</li>
-          <li>Alertas de escritorio</li>
-          <li>Perfiles guardados</li>
+          <li>Alertas de escritorio, whatsapp y sonidos</li>
+          <li>Modo interacción de sorteo</li>
+          <li>Soporte</li>
           <li class="no">Bot automático</li>
         </ul>
         <button class="plan-btn" onclick="openModal('basic')">Comprar Basic</button>
@@ -278,9 +280,11 @@ footer a{color:var(--muted);text-decoration:underline}
         <hr class="plan-divider">
         <ul class="plan-features">
           <li>Todo lo de Basic</li>
-          <li>Bot automático de inscripción</li>
           <li>Modo test / simulador</li>
+          <li>Bot automático</li>
+          <li>Perfiles guardados</li>
           <li>Cooldown anti-detección</li>
+          <li>Gestor de patrones de detección</li>
           <li>Soporte prioritario</li>
         </ul>
         <button class="plan-btn featured-btn" onclick="openModal('pro')">Comprar PRO</button>
@@ -315,7 +319,7 @@ footer a{color:var(--muted);text-decoration:underline}
 
 <div class="cta-final">
   <h2>Listo para empezar</h2>
-  <p>Descargá el bot, probá gratis 24 horas o solicitá tu licencia ahora.</p>
+  <p>Descargá el bot, probá gratis 48 horas o solicitá tu licencia ahora.</p>
   <div class="hero-btns">
     <a href="https://www.mediafire.com/file/okn5jkz4tmw3s6f/TwitchRaffleMonitor_v6.zip/file" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;text-decoration:none">↓ Descargar</a>
     <button class="btn-primary" onclick="openModal('trial')">Probar gratis</button>
@@ -327,7 +331,7 @@ footer a{color:var(--muted);text-decoration:underline}
 <div class="modal-overlay" id="modal-trial">
   <div class="modal-box">
     <button class="modal-close" onclick="closeTrialModal()">×</button>
-    <div class="modal-eyebrow">Free Trial — 24hs</div>
+    <div class="modal-eyebrow">Free Trial — 48hs</div>
     <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;margin-bottom:1.2rem">
       Descargá el bot, abrilo, y cuando te pida la clave de activación pegá esta:
     </p>
@@ -343,8 +347,8 @@ footer a{color:var(--muted);text-decoration:underline}
       ↓ Descargar el bot
     </a>
     <p style="color:var(--muted);font-size:0.78rem;line-height:1.5">
-      La primera vez que la uses, el bot genera una licencia única para tu PC válida por
-      24hs exactas desde ese momento. Podés usarla una sola vez por equipo.
+      Al utilizar TRIAL Licence, el bot genera una licencia única para tu PC válida por
+      48hs exactas desde ese momento. Podés usarla una sola vez por equipo.
     </p>
     <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:1rem">
       ¿Necesitás más tiempo? <a href="#" onclick="closeTrialModal();openModal('basic');return false;" style="color:#8ea1ff;text-decoration:underline">Mirá los planes pagos</a>
