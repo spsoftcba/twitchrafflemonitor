@@ -6,6 +6,20 @@
 <title>Raffle Monitor — Twitch</title>
 <meta name="description" content="Monitor en tiempo real de sorteos en chats de Twitch. Multicanal, alertas de escritorio, bot automatico opcional.">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  function openLightbox(src, cap){
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-cap').innerText = cap;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -228,16 +242,35 @@ footer a{color:var(--muted);text-decoration:underline}
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="gallery">
   <h2 class="section-title">Así se ve en acción</h2>
-  <p class="section-sub">Capturas reales de la aplicación</p>
+  <p class="section-sub">Capturas reales de la aplicación — click para ver a pantalla completa</p>
   <div class="gallery-grid">
-    <div class="gallery-item">
+    <div class="gallery-item" onclick="openLightbox('screenshots/monitor-multicanal.png','Monitor multicanal — paneles de chat en vivo')">
       <img src="screenshots/monitor-multicanal.png" alt="Monitor multicanal">
       <div class="gallery-caption">Monitor multicanal — paneles de chat en vivo</div>
+      <div class="gallery-zoom">🔍</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('screenshots/alertas.png','Alertas de escritorio en tiempo real')">
+      <img src="screenshots/alertas.png" alt="Alertas de escritorio">
+      <div class="gallery-caption">Alertas de escritorio en tiempo real</div>
+      <div class="gallery-zoom">🔍</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('screenshots/win.png','Detección de ganador — notificación instantánea')">
+      <img src="screenshots/win.png" alt="Pantalla de victoria">
+      <div class="gallery-caption">Detección de ganador — notificación instantánea</div>
+      <div class="gallery-zoom">🔍</div>
     </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:1rem;cursor:zoom-out">
+  <img id="lightbox-img" src="" style="max-width:90vw;max-height:85vh;border-radius:8px;box-shadow:0 0 60px rgba(0,0,0,0.8)">
+  <p id="lightbox-cap" style="color:#aaa;font-size:0.82rem;font-family:'Inter',sans-serif"></p>
+  <button onclick="closeLightbox()" style="position:fixed;top:1.2rem;right:1.5rem;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;line-height:1">×</button>
+</div>
 
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
